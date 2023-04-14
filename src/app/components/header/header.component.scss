@@ -1,0 +1,26 @@
+nav > a.active {
+  background-color: blue;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+    ul {
+      display: flex;
+      list-style: none;
+      a {
+        padding: 5px;
+        text-decoration: none;
+        &.active {
+          background-color: blue;
+        }
+      }
+    }
+}
+
+.header-row{
+  width: 100%;
+}
+.header-toolbar {
+  margin-bottom: 20px;
+}
