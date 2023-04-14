@@ -1,0 +1,81 @@
+<form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Product</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <input placeholder="Name" formControlName="name" matInput type="text">
+            <div class="messages" *ngIf="nameField!.touched && nameField!.invalid">
+              <mat-error *ngIf="nameField!.hasError('required')">
+                required*
+              </mat-error>
+              <mat-error *ngIf="nameField!.hasError('minlength')">
+                4 char min
+              </mat-error>
+            </div>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <input placeholder="Price" formControlName="price" matInput type="number">
+          </mat-form-field>
+          <div *ngIf="priceField!.errors && priceField!.dirty">
+            <p *ngIf="priceField!.hasError('required')">required*</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <textarea placeholder="Description" formControlName="description" matInput></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option [value]="category.category" *ngFor="let category of categories">
+                {{ category.category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <mat-form-field>
+            <input placeholder="Stock" formControlName="stock" matInput type="number">
+          </mat-form-field>
+          <div *ngIf="priceField!.errors && priceField!.dirty">
+            <p *ngIf="priceField!.hasError('price_invalid')">Must not be over 10000</p>
+            <p *ngIf="priceField!.hasError('required')">required*</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs">
+          <button mat-raised-button color="primary" type="button" (click)="addimageField()">Add image</button>
+          <div formArrayName="images" *ngFor="let image of imageField.controls; let i=index">
+            <div [formGroupName]="i">
+              <mat-form-field>
+                <mat-label>Image Url</mat-label>
+                <input placeholder="url" formControlName="image" matInput type="text">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="form.invalid" mat-raised-button type="submit">Save</button>
+    </mat-card-actions>
+  </mat-card>
+
+</form>
