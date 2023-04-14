@@ -38,8 +38,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { ProductsPageComponent } from './pages/products-page/products-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { PagenotfoundPageComponent } from './pages/pagenotfound-page/pagenotfound-page.component';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -64,8 +62,6 @@ import { ProductsListComponent } from './components/products-list/products-list.
     AppComponent,
     WelcomePageComponent,
     ProductsPageComponent,
-    LoginPageComponent,
-    AdminPageComponent,
     PagenotfoundPageComponent,
     LayoutComponent,
     HeaderComponent,
