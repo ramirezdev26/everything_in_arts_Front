@@ -1,0 +1,117 @@
+<mat-horizontal-stepper [ngStyle]="{background: '#3f51b5'}">
+  <mat-step>
+    <ng-template matStepLabel>Your products</ng-template>
+    <div *ngIf="(products$ | async) as products">
+        <p *ngIf="products.length === 0">not products yet</p>
+        <div class="row" *ngFor="let product of products">
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <div class="image_box">
+              <img class="image" [src]="product.images[0]" alt="">
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-4">
+            <div class="box">
+              {{ product.name }}
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-4">
+            <div class="box">
+              {{ product.price | currency}}
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2">
+            <div class="box">
+              <button (click)="removeCart(product)" mat-raised-button color="primary">Remove</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Personal data</ng-template>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <mat-card>
+        <mat-card-content>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input placeholder="Name" formControlName="name" matInput type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input placeholder="Email" formControlName="email" matInput type="text">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs">
+              <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input placeholder="Address" formControlName="address" matInput type="text">
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button [disabled]="form.invalid" color="primary" type="submit">Next</button>
+        </mat-card-actions>
+      </mat-card>
+     </form>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Checkout</ng-template>
+    <div *ngIf="(products$ | async) as products">
+      <p *ngIf="products.length === 0">not products yet</p>
+      <div class="row" *ngFor="let product of invoiceData.itemList">
+        <div class="col-xs-12 col-sm-2 col-md-2">
+          <div class="image_box">
+            <img class="image" [src]="product.images[0]" alt="">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <div class="box">
+            {{ product.name }}
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4">
+          <div class="box">
+            {{ product.price | currency}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        Name:
+        {{ invoiceData.name }}
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        Email:
+        {{ invoiceData.email }}
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        Address:
+        {{ invoiceData.address }}
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        Total:
+        {{ invoiceData.total | currency }}
+      </div>
+    </div>
+    <button [disabled]="form.invalid" (click)="sendInvoice()" mat-raised-button color="primary">Send</button>
+  </mat-step>
+</mat-horizontal-stepper>
+
