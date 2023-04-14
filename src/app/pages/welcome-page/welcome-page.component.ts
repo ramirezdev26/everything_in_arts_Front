@@ -1,10 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+
+import Swiper from 'swiper';
+
 
 @Component({
   selector: 'app-welcome-page',
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss']
 })
-export class WelcomePageComponent {
+export class WelcomePageComponent implements AfterViewInit{
+
+  mySwiper: Swiper = new Swiper('');
+
+  constructor(){}
+
+  ngAfterViewInit() {
+    this.mySwiper = new Swiper('.swiper-container');
+  }
 
 }
